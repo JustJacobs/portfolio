@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Light Blue Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* === Theme === */
+      --primary: #dbeafe;         /* light blue (100) */
+      --primary-strong:#60a5fa;   /* blue (400) */
+      --bg:#ffffff;
+      --text:#0f172a;             /* slate-900 */
+      --muted:#64748b;            /* slate-500 */
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --shadow: 0 10px 30px rgba(2,6,23,.06), 0 2px 10px rgba(2,6,23,.04);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px,92%);margin-inline:auto}
+    .flex{display:flex}
+    .grid{display:grid}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.1rem;border:1px solid #0f172a15;border-radius:999px;background:#fff;box-shadow:var(--shadow);font-weight:600}
+    .btn.primary{background:var(--text);color:#fff;border-color:transparent}
+    .btn.ghost{background:#fff}
+    .badge{display:inline-flex;align-items:center;font-weight:700;font-size:.8rem;padding:.4rem .7rem;border-radius:999px;border:1px dashed #00000025;background:#fff;box-shadow:var(--shadow)}
+
+    /* === Navbar === */
+    header{position:sticky;top:0;background:rgba(255,255,255,.8);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border);z-index:50}
+    .nav{height:70px} 
+    .brand{font-weight:800;letter-spacing:.3px}
+    nav a{padding:.6rem .9rem;border-radius:12px}
+    nav a:hover{background:var(--primary)}
+
+    .hero{background:linear-gradient(180deg,var(--primary),#f8fbff 60%);padding:64px 0 48px;border-bottom:1px solid var(--border)}
+    .hero-wrap{align-items:center;gap:44px}
+    .hero-left{flex:1}
+    .hero-right{flex:1;position:relative}
+    .hero h1{font-size:clamp(32px,4.4vw,54px);line-height:1.05;margin:18px 0}
+    .hero p{color:var(--muted);font-size:1.05rem}
+    .hero-figure{position:relative;aspect-ratio:1/1;border-radius:28px;background:radial-gradient(1200px 600px at 70% -10%, #fff, #eef5ff 55%, #dbeafe);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}
+    .hero-figure img{width:100%;height:100%;object-fit:cover}
+    .hero-figure .doodles{position:absolute;inset:0;pointer-events:none;opacity:.25;}
+
+    /* === Sections === */
+    section{padding:66px 0}
+    .section-head{text-align:center;margin-bottom:26px}
+    .section-head h2{font-size:clamp(26px,3.2vw,36px);margin:0}
+    .section-head p{color:var(--muted);max-width:720px;margin:10px auto 0}
+
+    /* Cards */
+    .cards{grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{grid-column:span 3;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+    .card h3{margin:6px 0 10px;font-size:1.05rem}
+    .card p{color:var(--muted)}
+    .card .icon{width:40px;height:40px;border-radius:12px;background:var(--primary);display:grid;place-items:center;font-weight:800}
+
+    @media (max-width:1000px){.card{grid-column:span 6}}
+    @media (max-width:640px){.hero-wrap{flex-direction:column}.card{grid-column:span 12}}
+
+    /* Stats */
+    .stats{grid-template-columns:repeat(4,1fr);gap:16px}
+    .stat{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow)}
+    .stat .num{font-weight:800;font-size:1.6rem}
+    .stat .label{color:var(--muted)}
+
+    @media (max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:520px){.stats{grid-template-columns:1fr}}
+
+    /* Projects */
+    .projects{grid-template-columns:repeat(3,1fr);gap:18px}
+    .project{background:#fff;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .project .thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#ebf3ff,#dbeafe);border-bottom:1px solid var(--border)}
+    .project .content{padding:16px}
+    .project .title{font-weight:600}
+    .project .desc{color:var(--muted);font-size:.95rem;margin-top:6px}
+
+    @media (max-width:900px){.projects{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){.projects{grid-template-columns:1fr}}
+    /* Project thumbnails as real images */
+    .project .thumb { position: relative; overflow: hidden; }
+    .project .thumb img { object-fit: contain;padding: 14px; }
+    /* Process */
+    .process{grid-template-columns:repeat(3,1fr);gap:18px}
+    .step{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px 18px 24px;box-shadow:var(--shadow);position:relative}
+    .step .count{position:absolute;top:-12px;right:16px;background:var(--primary);border:1px solid var(--border);border-radius:999px;padding:.35rem .7rem;font-weight:800}
+    .step h3{margin:6px 0 10px}
+    .step p{color:var(--muted)}
+    .hero{position:relative; min-height:52vh; background:url('hero.webp') center/cover no-repeat;}
+    .hero__overlay{position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.45));}
+    .hero__content{position:relative; z-index:1; max-width:900px; margin:0 auto; padding:8rem 2rem 4rem; color:#fff; text-align:center;}
+    @media (max-width:900px){.process{grid-template-columns:1fr 1fr}}
+    @media (max-width:580px){.process{grid-template-columns:1fr}}
+
+    /* Footer */
+    footer{padding:50px 0;border-top:1px solid var(--border);background:#f8fbff}
+
+    /* Utilities */
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+  </style>
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container nav flex" style="align-items:center;justify-content:space-between;gap:20px">
+      <div class="brand" id="brand" style="display:none"></div>
+      <nav class="flex" style="gap:6px">
+        <a href="#projects" data-editable id="nav-projects">Projects</a>
+        <a href="#cv" data-editable id="nav-cv">CV</a>
+        <a href="#contact" data-editable id="nav-contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container hero-wrap flex">
+      <div class="hero-left">        <h1 data-editable id="hero-title">Jacob Sowah: second‑year <u>Computer Science</u> student at <span style="color:var(--text)">Aberystwyth University</span>.</h1>
+        <p data-editable id="hero-sub">Specialising in AI this year (machine learning, data science, and intelligent systems). I’m actively seeking a 12‑month placement / year in industry.</p>
+        <div style="margin-top:18px;display:flex;gap:10px">
+          <a class="btn primary" href="#projects" data-editable id="hero-cta1" href="#projects">View Projects</a>
+          <a class="btn ghost" href="#contact" data-editable id="hero-cta2" href="#cv">Download CV</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <figure class="hero-figure">
+          <img id="hero-image" data-editable-image alt="Blue code background"src="Main.png"/>
+            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'>\
+              <defs>\
+                <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>\
+                  <stop offset='0' stop-color='%23dbeafe'/>\
+                  <stop offset='1' stop-color='%23bfdbfe'/>\
+                </linearGradient>\
+              </defs>\
+              <rect width='800' height='800' fill='url(%23g)'/>\
+              <circle cx='400' cy='320' r='140' fill='%23ffffff' opacity='.7'/>\
+              <rect x='300' y='430' width='200' height='180' rx='36' fill='%23ffffff' opacity='.7'/>\
+              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%2364748b' font-size='28' font-family='Inter, Arial'>Your Photo</text>\
+            </svg>" />
+          <div class="img-tools">
+            <button type="button" id="btnUploadHero">Change image</button>
+            <input id="fileHero" type="file" accept="image/*" style="display:none" />
+          </div>
+          <svg class="doodles" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000" stroke-opacity=".2" stroke-width="2">
+            <path d="M40 80c40-40 80 40 120 0s80-40 120 0"/>
+            <path d="M60 320c60-20 80-60 120-40s80 80 160 20"/>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <span class="badge" data-editable id="srv-badge">🎯 What I Bring</span>
+        <h2 data-editable id="srv-title">I’m ready to contribute from day one on a placement.</h2>
+      </div>
+
+      <div class="grid cards">
+        <article class="card">
+          <div class="icon">⚡</div>
+          <h3 data-editable id="srv1-title">Languages & Tools</h3>
+          <p data-editable id="srv1-desc">Python, Java, JavaScript/TypeScript, SQL,C and C++. Comfortable across CLI and VS Code.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🔎</div>
+          <h3 data-editable id="srv2-title">AI Focus (This Year)</h3>
+          <p data-editable id="srv2-desc">Learning PyTorch & scikit‑learn, data preprocessing with pandas/NumPy, model evaluation, and practical ML deployment basics.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🎨</div>
+          <h3 data-editable id="srv3-title">Engineering Practices</h3>
+          <p data-editable id="srv3-desc">Clean code, version control workflows, unit testing (pytest/JUnit), simple CI with GitHub Actions, readable docs, and code reviews.</p>
+        </article>
+        <article class="card">
+          <div class="icon">🏷️</div>
+          <h3 data-editable id="srv4-title">Team & Communication</h3>
+          <p data-editable id="srv4-desc">Clear written/spoken communication, quick learner, and proactive about asking the right questions to unblock work.</p>
+        </article>
+      </div>
+
+      <div class="grid stats" style="margin-top:26px">
+        <div class="stat">
+          <div class="num" data-editable id="stat1-num">2nd year</div>
+          <div class="label" data-editable id="stat1-lbl">BSc Computer Science, Aberystwyth University</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-editable id="stat2-num">AI</div>
+          <div class="label" data-editable id="stat2-lbl">Specialising in Machine Learning this year</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-editable id="stat3-num">12 mo</div>
+          <div class="label" data-editable id="stat3-lbl">Seeking 2026–27 placement / year in industry</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-editable id="stat4-num">Team experience</div>
+          <div class="label" data-editable id="stat4-lbl"><a href="#" data-editable id="team-state">Been working part time for 4 years</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects" style="background:#fafcff;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <div class="section-head">
+        <span class="badge" data-editable id="prj-badge">🧪 Selected Projects</span>
+        <h2 data-editable id="prj-title">A few things I’ve built and studied.</h2>
+      </div>
+
+      <div class="grid projects">
+        <article class="project">
+          <div class="thumb">
+            <img src="AI.png" alt="AI coursework – image classifier" loading="lazy">
+          </div>
+          <div class="content">
+            <div class="title" data-editable id="p1-title">AI Coursework — Image Classifier (PyTorch) (Incomplete)</div>
+            <div class="desc" data-editable id="p1-desc">Built and evaluated a CNN; improved validation accuracy with data augmentation and better learning‑rate scheduling.</div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="thumb"><img src="OOP.png" alt="Patience card game (OOP)" loading="lazy"></div>
+          <div class="content">
+            <div class="title" data-editable id="p2-title">Patience card game</div>
+            <div class="desc" data-editable id="p2-desc">Showing in-depth understanding of OOP Principals.</div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="thumb"><img src="JAVA.png" alt="Java language learning app" loading="lazy"></div>
+          <div class="content">
+            <div class="title" data-editable id="p3-title">Language learning app</div>
+            <div class="desc" data-editable id="p3-desc">A java application that stores and helps people learn languages.</div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="thumb"><img src="C++.png" alt="C++ data structures library" loading="lazy"></div>
+          <div class="content">
+            <div class="title" data-editable id="p4-title">Data Structures Library (C++) (Incomplete)</div>
+            <div class="desc" data-editable id="p4-desc">Implemented an LRU cache and graph algorithms with attention to Big‑O and testing.</div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="thumb"><img src="Structure.png" alt="Arduino/C mini Tetris (Minitris)" loading="lazy"></div>
+          <div class="content">
+            <div class="title" data-editable id="p5-title">Minitris - C arduino game</div>
+            <div class="desc" data-editable id="p5-desc">A small game using an Arduino shield showing basic programming principals.</div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="thumb"><img src="WEbDev.png" alt="Personal portfolio website" loading="lazy"></div>
+          <div class="content">
+            <div class="title" data-editable id="p6-title">Personal Portfolio Website</div>
+            <div class="desc" data-editable id="p6-desc">This site — built from scratch; accessible, responsive, and editable.</div>
+          </div>
+        </article>
+      </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Process ===== -->
+  <section id="cv">
+    <div class="container">
+      <div class="section-head">
+        <span class="badge" data-editable id="cv-badge">📄 CV</span>
+        <h2 data-editable id="cv-title">Grab a DOCX of my CV.</h2>
+        <p class="muted" data-editable id="cv-sub"> Look into my academic history and look at a more traditional cv.</p>
+      </div>
+      <div class="center" style="margin-top:10px">
+        <a class="btn primary" href="Jacob_Sowah_CV.docx" target="_blank" rel="noopener" data-editable id="cv-download">Download CV (DOCX)</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact / Footer ===== -->
+  <section id="contact" style="padding:60px 0 20px">
+    <div class="container center" style="max-width:760px">
+      <h2 data-editable id="contact-title">Want to contact me?</h2>
+      <p class="muted" data-editable id="contact-desc">Please reach out i am open to any and all opportunities.</p>
+      <a class="btn primary" href="mailto:jacobsowah23@gmail.com" data-editable id="contact-cta">Email Me</a>
+       <p class="muted" data-editable id="email">jacobsowah23@gmail.com</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container flex" style="justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="display:flex;gap:10px">
+        <a class="badge" href="https://www.linkedin.com/in/jacob-sowah-a38272288" target="_blank" rel="noopener noreferrer" id="foot-link3">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
